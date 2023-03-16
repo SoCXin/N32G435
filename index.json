@@ -1,13 +1,13 @@
 {
     "type":"MCU",
-    "name":"N32L406",
-    "title": "Nationstech N32L406 MCU",
-    "description":"Nationstech LE MCU",
+    "name":"N32G435",
+    "title": "Nationstech N32G435 MCU",
+    "description":"Nationstech ADC MCU",
     "Core": {
         "CoreNum": 1,
         "Core":"Cortex-M4",
-        "Fmax":64,
-        "DMIPS": 80,
+        "Fmax":108,
+        "DMIPS": 135,
         "CoreMark": 240
     },
     "manufacturer": {
@@ -16,14 +16,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/SoCXin/N32L406.git"
+        "url": "https://github.com/SoCXin/N32G435.git"
     },
     "version":"1.0.0",
-    "series":["N32L406CB"],
-    "package":["QFN48","LQFP48","LQFP32"],
+    "series":["N32G435","N32G432"],
+    "package":["QFN28","LQFP64","LQFP48","LQFP32"],
     "peripheral": ["CAN","ADC","USART","SPI","I2C"],
     "temp": [-40,105],
-    "volt": [2.4,3.6],
+    "volt": [1.8,3.6],
     "ESD": {
         "HBM": 4000,
         "CDM": 500
