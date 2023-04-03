@@ -28,5 +28,4 @@
 
 [N32G435](https://item.szlcsc.com/3099941.html) 5Msps ADC非常强大，同时具备USB外设，适用于工具场景。
 
-近期会有各种优惠团购，价格可以到￥4左右。
-
+ADC配置可对标[STM32G431](https://github.com/SoCXin/STM32G474)使用，但性价比优势不明显，不推荐。

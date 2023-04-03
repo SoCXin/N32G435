@@ -1,0 +1,163 @@
+﻿Nationstech.N32G43x_Library.0.1.0版本：TIMx_DCTRL后面的寄存器无法应用DMA Burst功能，修改相应代码TIMx_DCTRL后面的寄存器无法应用DMA Burst功能，修改相应代码TIMx_DCTRL后面的寄存器无法应用DMA Burst功能，修改相应代码
+初版修订
+
+Nationstech.N32G43x_Library.1.0.0版本：
+1、n32g43x.h V1.0.2,
+   1)COMP结构体移动RES寄存器位置修改
+2、n32g43x.h v1.0.3、n32g43x_rcc.h v1.0.2、n32g43x_rcc.c v1.0.1
+   1)修改RCC_CFG3 RCC_CFG3_TRNG1MPRES分频值描述
+3、system_n32g43x.c v1.0.1
+   1)修改RCC->CFG3写复位值
+4、USB 新增 JoyStickMouse 例程
+5、NVIC IRQ_Mask main.c v1.0.1，更新Demo工程；
+6、USB 新增打印机例程
+7、ADC驱动C文件增加对校准功能的函数重入性控制 
+8、更正lpuart.h中LPUART_INT_WUF定义以及lpuart WakeUpFromStop2示例中PWR_EnterSTOP2Mode函数参数RetentionMode
+9、PWR中 LP RUN功耗优化，在SetSysClock_MSI函数添加RCC_DeInit()；
+10、更新RCC_CFG寄存器的MCOPRES[3:0]的定义；
+11、n32g43x.h v1.0.5 更新RCC_MCO_PLLCLK定义；
+    n32g43x_rcc.h v1.0.4 更新RCC_MCO_PLLCLK定义；
+	n32g43x_rcc.c v1.0.2 更新RCC_MCO_PLLCLK定义；
+12、1)LPUART和USART模块 HardwareFlowCtrl将Receive_RTS和Transmit_CTS合并成HardwareFlowCtrl，并更新readme
+      2)USART模块 IrDA将Receive和Transmit合并成Transmit_Receive，并更新readme
+      3)USART模块 IrDA功能增加低功耗模式测例LP_Transmit_Receive
+13、I2C代码优化
+14、STOP2系统时钟4分频异常问题优化
+15、时钟初始化更新，支持1C以后版本
+16、keep the bor always in Stop2&Standby&lp run&lp sleep mode
+17、USB例程GPIO端口配置前先初始化
+18、修改LPTIM_Disable为清使能位。
+
+
+Nationstech.N32G43x_Library.1.2.0版本：
+1、修改RT-Thread的设备驱动，更新RT-Thread的Demo的写法，采用默认启动方式——在main()里创建应用线程；添加IAR里的工程示例
+2、删除 RTC_ConfigOutput 中未使用的变量
+3、修改LPTIM_Disable函数
+4、配置 SystemInit()/RCC_DeInit(void) 函数 RCC->CFG2 为默认值 
+5、将User_RTC_Config.c中的%0.2 改成%2 消除GCC警告
+6、删除flash中未使用的变量
+7、修改RCC_DeInit(void) 函数 RCC->CLKINT 清中断赋值错误问题
+8、修改USB Keyboard例程，删除打印
+9、针对GCC编译进行优化，修改了I2C例程中的中断函数需要打印输出的变量类型将u32int_t改为unsigned int
+10、RCC模块增加LSE晶体配置接口函数LSE_XtalConfig
+11、USB Demo 在Suspend里面增加通过宏控制UCDR复位
+12、删除RT-Thread中drv_gpio.c中N32G43X_pin_irq_enable()函数里的IO配置
+13、修改n32g43x_wdog_control函数，不使用宏，定义两个变量存储RELV和PREDIV寄存器的值，删除RT-Thread的Demo的IAR工程里的dep文件
+14、EEPROM例程修改EEPROM读函数，以及I2C_slave_int中初始化I2C_slave的函数内部变量名称
+15、LPUART模块
+	驱动文件LPUART_GetIntStatus函数修改LPUART的WUF标志位获取问题
+16、修改USB驱动usb_regs.h文件里的_BlocksOf32宏，wNBlocks << 11改为wNBlocks << 10
+17、修改枚举变量GPIO_CurrentType 枚举值
+18、修改I2C EEPROM例程i2c_eeprom.c文件，将中断模式以及DMA模式调通。
+19、修改TimeBasic6 例程main.c RCC_ConfigPclk1(RCC_HCLK_DIV4)使PCLK1 = HCLK/4
+20、修改LPTIM DEMO中的产生测试信号的函数
+21、修改SPI FLASH中的W25Q128擦除命令宏定义
+22、新增GCC下载配置文件和启动文件
+23、修改void RCC_ConfigLse(uint8_t RCC_LSE, uint8_t LSE_Gm)函数
+24、修改TIM DEMO中注释
+25、修改DEMO readme，增加英文版本 readme
+26、USB demo ERROR和ESOF中断关闭
+27、修改WWDG例程中Readme相关描述、代码中函数WWDG_SetWValue和Delay的参数
+28、修改USB demo中latency的赋值方式及大小
+29、修改CAN波特率/扩展帧标志符/CAN GPIO/工作模式为正常模式
+30、将函数void RTC_WKUP_IRQHandler(void) 中的 EXTI_ClrITPendBit(EXTI_LINE20);提到周期性唤醒标志判断外
+31、TIMx_DCTRL后面的寄存器无法应用DMA Burst功能，修改相应代码
+32、将 SYSCLKConfig_STOP(uint32_t RCC_PLLMULL) 中的FLASH->AC 更换成变量操作
+33、增加I2C MASTER INT demo中的错误中断服务函数，以及修复IIC_RCCReset函数中的引脚状态复位错误。
+
+
+
+Nationstech.N32G43x_Library.1.2.1版本：
+1、增加ADC_DifferentialMode 例程
+2、退出LPRUN恢复SRAM电压至1.1V
+3、修改RtcAutoWakeUp例程，进入Stop2模式前后增加时钟切换操作
+4、修改RTC_CLKSourceConfig函数,去掉复位备份寄存器操作
+5、修改获取UID/UCID函数
+6、修改RTC例程增加重复分频机制
+7、串口例程增加清除溢出中断机制
+8、将RCC_ConfigLse函数分步赋值修改成变量一次性赋值
+9、RTC例程增加避免重复配置机制
+10、增加ADC_ReferenceVoltageSwitch 例程
+11、去掉Flash驱动中的PD选项位
+12、ADC启动增加延时滤波
+
+Nationstech.N32G43x_Library.0.1.0 version:
+Revision.
+
+Nationstech.N32G43x_Library.1.0.0 version:
+1. n32g43x.h V1.0.2:
+    1)COMP structure moved RES register position modification
+2、n32g43x.h v1.0.3、n32g43x_rcc.h v1.0.2、n32g43x_rcc.c v1.0.1
+    1) Modify RCC_CFG3 RCC_CFG3_TRNG1MPRES frequency division value description
+3. system_n32g43x.c v1.0.1:
+    1) modified RCC->CFG3 Write reset value
+4. USB added JoyStickMouse routine
+5. NVIC IRQ_Mask main.c v1.0.1, update Demo project
+6. USB added printer routines
+7. ADC driver C file adds functional reentrant control to the calibration function
+8. Correct the definition of LPUART_INT_WUF in lpuart.h and the parameter of PWR_EnterSTOP2Mode RetentionMode in the example of lpuart WakeUpFromStop2
+9. Optimize the power consumption of LP RUN in PWR, add RCC_DeInit() to the SetSysClock_MSI function;
+10. Update the definition of RCC_CFG register MCOPRES[3:0];
+11. n32g43x.h v1.0.5 update RCC_MCO_PLLCLK definition;
+     n32g43x_rcc.h v1.0.4 update RCC_MCO_PLLCLK definition;
+     n32g43x_rcc.c v1.0.2 Update RCC_MCO_PLLCLK definition
+12. 1)LPUART and USART module HardwareFlowCtrl merge Receive_RTS and Transmit_CTS into HardwareFlowCtrl and update readme
+     2)USART module IrDA merges Receive and Transmit into Transmit_Receive and updates readme
+     3)Added low power consumption test case LP_Transmit_Receive for IrDA function of USART module
+13. I2C code optimization
+14. STOP2 system clock 4 frequency division problem optimization
+15. Clock initialization update, support 1C later version
+16. keep the bor always in Stop2&Standby&lp run&lp sleep mode
+17. USB routine GPIO port is initialized before configuration
+18. Change LPTIM_Disable to enable LPTIM_Disable.
+
+
+Nationstech.N32G43x_Library.1.2.0 version:
+1. Modify the device driver of RT-Thread, update the writing of RT-Thread's Demo, and use the default startup method - create application threads in main(); add project examples in IAR
+2. Delete unused variables from RTC_ConfigOutput
+3. Modify the LPTIM_Disable function
+4. Configure SystemInit()/RCC_DeInit(void) RCC->CFG2 is the default value
+5. Change %0.2 in user_rtc_config.c to %2 to remove GCC warning
+6. Delete unused variables from the Flash
+7. Modify RCC->CLKINT in RCC_DeInit(void) function clear interrupt assignment error
+8. Modify the USB Keyboard routine to delete printing
+9. Optimized for GCC compilation, modified the variable type that the interrupt function in I2C routine needs to print, changed u32int_t to unsigned int
+10. Added interface function LSE_XtalConfig for LSE crystal configuration in RCC module
+11. Add macro control to UCDR reset in USB Demo
+12. Delete the I/O configuration of the N32G43X_pin_irq_enable() function in drv_gpio.c of rt-thread and change the USB Demo device name of rt-thread to N32L43X
+13. Modify the n32g43x_wdog_control function, Don't use macros, Define two variables to store the values of RELV and PREDIV registers, Delete the deP file in the IAR project of rt-thread Demo.
+14. EEPROM routine modify EEPROM read function, and I2C_slave_int initialization I2C_slave function internal variable name
+15. LPUART module: The driver file LPUART_GetIntStatus function modified the WUF flag bit of LPUART
+16. Modify the _BlocksOf32 macro in the USB driver usb_regs.h file, wNBlocks << 11 change to wNBlocks <<10
+17. Change the enumeration variable GPIO_CurrentType enumeration value
+18. Modify I2C EEPROM routine I2C_EEPROM. C file to switch on the interrupt mode and DMA mode
+19. Change TimeBasic6 routine main.c RCC_ConfigPclk1(RCC_HCLK_DIV4) to PCLK1 = HCLK/4
+20. Modify LPTIM DEMO to generate test signal function
+21. Modify the macro definition of W25Q128 erase command in SPI FLASH
+22. Added GCC download configuration file and startup file
+23. Modify the void RCC_ConfigLse(uint8_t RCC_LSE, uint8_t LSE_Gm) function
+24. Modify comments in TIM DEMO
+25. Modified the DEMO readme to add the English version readme
+26、USB demo ERROR and ESOF interrupt closed
+27. Modify the WWDG routine Readme description, WWDG_SetWValue and Delay parameters in the code=======
+28、Modify the latency assignment method and size in USB demo
+29. Modify RT_Thread CAN baud rate/extended frame identifier/CAN GPIO/working mode to normal mode
+30. Put EXTI_ClrITPendBit(EXTI_LINE20) in front of the check wakeup flag in void RTC_WKUP_IRQHandler(void)
+31. TIMx_DCTRL's subsequent registers cannot apply the DMABurst function, and modify the corresponding code
+32. Replace FLASH->AC in SYSCLKConfig_STOP(uint32_t RCC_PLLMULL) function with variable  operation
+33. Added error interrupt service function in I2C MASTER INT demo, and fixed pin state reset error in IIC_RCCReset function.
+
+
+Nationstech.N32G43x_Library.1.2.1 version:
+1.Add the demo of ADC_DifferentialMode
+2.Exit LPRUN mode and restore SRAM voltage to 1.1V
+3.Modify RtcAutoWakeUp Demo,Increase clock switching operation before and after entering Stop2 mode
+4.Modify RTC_CLKSourceConfig function to remove the reset bkp register operation
+5.Modify the function of obtaining UID/UCID
+6.Modify RTC Demo add repetitive frequency division mechanism
+7.USART Demo adds the machanism of clearing overflow interrupt
+8.Modify step by step assignment of RCC_ConfigLse function to one-time assignment of variables
+9.RTC Demo add mechanism to avoid duplicate configuration
+10.Add the demo of ADC_ReferenceVoltageSwitch
+11.Remove the PD option bit in the flash drive
+12.ADC startup add delay filtering
